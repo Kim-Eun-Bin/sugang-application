@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
             android:progress="25"/>
-
     </LinearLayout>
 
 </FrameLayout>
