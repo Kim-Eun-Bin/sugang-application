@@ -19,6 +19,15 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
+        <activity android:name=".AlarmActivity">
+
+        </activity>
+        <activity android:name=".MypageActivity">
+
+        </activity>
+        <activity android:name=".SugangActivity">
+
+        </activity>
     </application>
 
 </manifest>
