@@ -1,11 +1,14 @@
 package com.tpj.teamproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MypageActivity extends AppCompatActivity {
@@ -42,9 +45,24 @@ public class MypageActivity extends AppCompatActivity {
     }
 
     public void onClick5(View view) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:01063032666"));
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("고객센터 연결").setMessage("전화연결 하시겠습니까?");
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
+           public void onClick(DialogInterface dialog, int id) {
+               Intent intent = new Intent();
+               intent.setAction(Intent.ACTION_DIAL);
+               intent.setData(Uri.parse("tel:01063032666"));
+               startActivity(intent);
+           }
+        });
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
+           public void onClick(DialogInterface dialog, int id)
+           {
+                dialog.cancel();
+           }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
