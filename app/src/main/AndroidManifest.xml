@@ -28,6 +28,9 @@
         <activity android:name=".SugangActivity">
 
         </activity>
+        <activity android:name=".MemoActivity">
+
+        </activity>
     </application>
 
 </manifest>

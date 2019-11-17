@@ -22,7 +22,11 @@ public class AlarmActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String data = year + "/" + month + "/" + dayOfMonth;
-                Log.d(TAG, "onSelectedDayChange: date: "+data);
+                Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy: "+data);
+
+                Intent intent = new Intent(AlarmActivity.this,MemoActivity.class);
+                intent.putExtra("data",data);
+                startActivity(intent);
             }
         });
         Button btn1 = (Button) findViewById(R.id.btn1);
