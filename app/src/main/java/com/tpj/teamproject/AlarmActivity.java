@@ -21,8 +21,8 @@ public class AlarmActivity extends AppCompatActivity {
         mCalenderView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String data = year + "/" + month + "/" + dayOfMonth;
-                Log.d(TAG, "onSelectedDayChange: mm/dd/yyyy: "+data);
+                String data = year + "." + month + "." + dayOfMonth;
+                Log.d(TAG, "onSelectedDayChange: yyyy.mm.dd: "+data);
 
                 Intent intent = new Intent(AlarmActivity.this,MemoActivity.class);
                 intent.putExtra("data",data);
