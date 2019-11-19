@@ -22,7 +22,7 @@ public class MypageActivity extends AppCompatActivity {
     private TextView todayText;
     private TextView resultText;
     private Button dateButton;
-
+    private static final String TAG = "MypageActivity";
     private int tYear;           // 현재 연월일 변수
     private int tMonth;
     private int tDay;
@@ -37,9 +37,9 @@ public class MypageActivity extends AppCompatActivity {
     private long r;
 
     private int resultNumber=0;
-
+    private int result_second = 0;
     static final int DATE_DIALOG_ID=0;
-
+    private  int count = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,8 @@ public class MypageActivity extends AppCompatActivity {
         Button btn3 = (Button) findViewById(R.id.btn3);
         Button btn4 = (Button) findViewById(R.id.btn4);
         Button btn5 = (Button) findViewById(R.id.btn5);
+        //ProgressBar pgBar = (ProgressBar) findViewById(R.id.progressBar);
+
 
         ddayText=(TextView)findViewById(R.id.dday);
         todayText=(TextView)findViewById(R.id.today);
@@ -78,8 +80,10 @@ public class MypageActivity extends AppCompatActivity {
         r = (d-t)/(24*60*60*1000);                 // 디데이 날짜에서 개강일 날짜를 뺀 값을 '일'단위로 바꿈
 
         resultNumber=(int)r+1;
-        updateDisplay();
 
+
+        updateDisplay();
+      //  Toast.makeText(getApplicationContext(),resultNumber,Toast.LENGTH_SHORT).show();
 
     }
 
@@ -131,11 +135,14 @@ public class MypageActivity extends AppCompatActivity {
 
         if(resultNumber>=0){
             resultText.setText(String.format("D-%d", resultNumber));
+            count =1;
         }
         else{
             int absR=Math.abs(resultNumber);
             resultText.setText(String.format("D+%d", absR));
+            count = 0;
         }
+
     }//디데이 날짜가 오늘날짜보다 뒤에오면 '-', 앞에오면 '+'를 붙인다
 
     private DatePickerDialog.OnDateSetListener dDateSetListener=new DatePickerDialog.OnDateSetListener() {

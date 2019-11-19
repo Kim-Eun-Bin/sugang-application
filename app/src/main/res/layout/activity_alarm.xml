@@ -66,9 +66,14 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="395dp"
-        android:layout_height="464dp"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="52dp"
+        android:layout_width="415dp"
+        android:layout_height="349dp"
+        android:layout_marginTop="116dp"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

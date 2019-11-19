@@ -25,8 +25,9 @@ public class MemoActivity extends AppCompatActivity {
     private Button btnGoCalendar;
     Button load, save, delete;
     EditText inputText;
+    private int find_state;
     private String filename;
-    private String data_filename=("비어있음");
+    private String data_filename="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +49,11 @@ public class MemoActivity extends AppCompatActivity {
         save.setOnClickListener(listener);
         delete.setOnClickListener(listener);
 
-        if(data_filename == "비어있음") {
-            filename = data_filename;
-            Log.i("TAG", filename);
-            load(filename);
-        }
-        else
-        {
             filename = data_filename;
             Log.i("TAG", filename);
             load(filename);
 
-        }
+
         btnGoCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +110,7 @@ public class MemoActivity extends AppCompatActivity {
                                        // filename = alert_edit2.getText().toString();
                                             filename = data_filename;
                                         save(filename);
+                                        find_state = 1;
                                     }
                                 })
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -164,6 +159,7 @@ public class MemoActivity extends AppCompatActivity {
             String out = inputText.getText().toString();
             fos.write(out.getBytes());
             Toast.makeText(MemoActivity.this, "save 완료", Toast.LENGTH_SHORT).show();
+
         }catch(Exception e){
             Toast.makeText(MemoActivity.this, "저장할 파일명을 입력하세요", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -176,6 +172,8 @@ public class MemoActivity extends AppCompatActivity {
         boolean b = deleteFile(filename);
         if(b){
             Toast.makeText(MemoActivity.this, "delete 완료", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MemoActivity.this, AlarmActivity.class);
+            startActivity(intent);
         }else{
             Toast.makeText(MemoActivity.this, "delete 실패", Toast.LENGTH_SHORT).show();
         }

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AlarmActivity extends AppCompatActivity {
-    private  static  final String TAG = "AlarmActivity";
+    private  static final String TAG = "AlarmActivity";
     private CalendarView mCalenderView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
