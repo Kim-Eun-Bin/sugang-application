@@ -57,7 +57,7 @@ public class MemoActivity extends AppCompatActivity {
         btnGoCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MemoActivity.this, AlarmActivity.class);
+                Intent intent = new Intent(MemoActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -69,8 +69,8 @@ public class MemoActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.load:
                     Log.i("TAG", "load 진행");
-                    LinearLayout alert_layout1 = (LinearLayout) View.inflate(MemoActivity.this, R.layout.alert_layout, null);
-                    final EditText alert_edit = (EditText) alert_layout1.findViewById(R.id.search_memo);
+                    //LinearLayout alert_layout1 = (LinearLayout) View.inflate(MemoActivity.this, R.layout.alert_layout, null);
+                    //final EditText alert_edit = (EditText) alert_layout1.findViewById(R.id.search_memo);
                     new AlertDialog.Builder(MemoActivity.this)
                             .setTitle("메모 불러오기")
                             .setMessage("불러올 메모의 날짜 입력")
@@ -96,8 +96,8 @@ public class MemoActivity extends AppCompatActivity {
                     break;
                 case R.id.save:
                     Log.i("TAG", "save 진행");
-                    LinearLayout alert_layout2 = (LinearLayout) View.inflate(MemoActivity.this, R.layout.alert_layout, null);
-                    final EditText alert_edit2 = (EditText) alert_layout2.findViewById(R.id.search_memo);
+                    //LinearLayout alert_layout2 = (LinearLayout) View.inflate(MemoActivity.this, R.layout.alert_layout, null);
+                    //final EditText alert_edit2 = (EditText) alert_layout2.findViewById(R.id.search_memo);
                     if (filename == null) {
                         new AlertDialog.Builder(MemoActivity.this)
                                 .setTitle("메모 저장하기")

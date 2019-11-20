@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick3(View view) {
-        Intent intent = new Intent(this,AlarmActivity.class);
+        Intent intent = new Intent(this,CalendarActivity.class);
         startActivity(intent);
     }
 
