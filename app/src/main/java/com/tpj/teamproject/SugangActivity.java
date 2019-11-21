@@ -17,6 +17,13 @@ public class SugangActivity extends AppCompatActivity {
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
         Button btn4 = (Button) findViewById(R.id.btn4);
+        Button insert = findViewById(R.id.btn_sugang_user_insert);
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SugangActivity.this,UserInsertActivity.class));
+            }
+        });
 
     }
 

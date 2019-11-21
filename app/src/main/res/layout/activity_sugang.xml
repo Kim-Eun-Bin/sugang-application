@@ -8,6 +8,12 @@
     tools:context=".SugangActivity">
 
     <Button
+        android:id="@+id/btn_sugang_user_insert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="사용자 입력" />
+
+    <Button
         android:id="@+id/btn3"
         android:layout_width="100dp"
         android:layout_height="100dp"
