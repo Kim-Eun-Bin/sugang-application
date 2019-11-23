@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:layout_margin="6dp"
     android:background="#FFFEFF"
     android:elevation="6dp">
@@ -10,17 +10,65 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/item_sugang_name"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="과목 이름"/>
-        <Button
-            android:id="@+id/go_btn"
+        <LinearLayout
+            android:layout_marginTop="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"/>
+            android:orientation="vertical">
+            <TextView
+                android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수강여부"/>
+            <RadioButton
+                android:layout_gravity="center"
+                android:id="@+id/radio_sugang_isComplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginVertical="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginHorizontal="12dp"
+                android:textColor="#000"
+                android:id="@+id/item_sugang_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="과목 이름"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:inputType="numberDecimal"
+                android:id="@+id/edit_sugang_grade"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:textSize="16dp"
+                android:background="@null"/>
+            <TextView
+                android:id="@+id/text_sugang_save_grade"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF9999"
+                android:clickable="true"
+                android:text="학점 변경"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

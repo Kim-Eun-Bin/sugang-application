@@ -29,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login);
         afterLoginButton = findViewById(R.id.afterlogin);
 
+        SharedPreferences pref = getSharedPreferences("auth",Context.MODE_PRIVATE);
+        usernameEditText.setText(pref.getString("inputID",""));
+        passwordEditText.setText(pref.getString("inputPW",""));
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

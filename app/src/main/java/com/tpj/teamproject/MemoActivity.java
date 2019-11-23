@@ -57,8 +57,8 @@ public class MemoActivity extends AppCompatActivity {
         btnGoCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MemoActivity.this, CalendarActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MemoActivity.this, CalendarActivity.class);
+                //startActivity(intent);
             }
         });
     }

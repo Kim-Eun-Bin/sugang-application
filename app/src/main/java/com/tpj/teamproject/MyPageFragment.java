@@ -2,14 +2,18 @@ package com.tpj.teamproject;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -17,15 +21,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.content.Context.ALARM_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 
-public class MypageActivity extends AppCompatActivity {
+
+public class MyPageFragment extends Fragment {
+
+    View mView;
+
     private int m_time = 0;
     private TextView ddayText;
     private TextView todayText;
@@ -56,22 +63,20 @@ public class MypageActivity extends AppCompatActivity {
     private int result_second = 0;
     static final int DATE_DIALOG_ID=0;
     private  int count = 1;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage);
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn3 = (Button) findViewById(R.id.btn3);
-        Button btn4 = (Button) findViewById(R.id.btn4);
-        Button btn5 = (Button) findViewById(R.id.btn5);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mView =  inflater.inflate(R.layout.fragment_my_page, container, false);
+        // Inflate the layout for this fragment
+
         //ProgressBar pgBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        switch1 = (Switch) findViewById(R.id.switch1);
-        ddayText=(TextView)findViewById(R.id.dday);
-        todayText=(TextView)findViewById(R.id.today);
-        resultText=(TextView)findViewById(R.id.result);
-        dateButton=(Button)findViewById(R.id.dateButton);
+        switch1 = mView.findViewById(R.id.switch1);
+        ddayText = mView.findViewById(R.id.dday);
+        todayText = mView.findViewById(R.id.today);
+        resultText = mView.findViewById(R.id.result);
+        dateButton = mView.findViewById(R.id.dateButton);
 
         dateButton.setOnClickListener(new View.OnClickListener() {
 
@@ -79,7 +84,7 @@ public class MypageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                showDialog(0);//----------------
+                //showDialog(0);//----------------
             }
         });
 
@@ -99,24 +104,25 @@ public class MypageActivity extends AppCompatActivity {
 
 
         updateDisplay();
-      //  Toast.makeText(getApplicationContext(),resultNumber,Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getApplicationContext(),resultNumber,Toast.LENGTH_SHORT).show();
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     alarmWork(m_time);
-                } else {
-
                 }
                 saveData();
             }
         });
         loadDate();
         updateViews();
+
+        return mView;
     }
 
+
     public void saveData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences .Editor editor = sharedPreferences.edit();
 
         editor.putInt(ALARM_TIME, m_time);
@@ -126,7 +132,7 @@ public class MypageActivity extends AppCompatActivity {
     }
 
     public void loadDate(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         switchOnOff = sharedPreferences.getBoolean(SWITCH1, false);
         m_time = sharedPreferences.getInt(ALARM_TIME, 0);
     }
@@ -135,46 +141,6 @@ public class MypageActivity extends AppCompatActivity {
         switch1.setChecked(switchOnOff);
     }
 
-    public void onClick1(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClick2(View view) {
-        Intent intent = new Intent(this, SugangActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClick3(View view) {
-        Intent intent = new Intent(this, CalendarActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClick4(View view) {
-        Intent intent = new Intent(this, MypageActivity.class);
-        startActivity(intent);
-    }
-    public void onClick5(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("고객센터 연결").setMessage("전화연결 하시겠습니까?");
-        builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:01063032666"));
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int id)
-            {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
 
     public void onClick6(View view) {
         final List<String> Items = new ArrayList<>();
@@ -189,7 +155,7 @@ public class MypageActivity extends AppCompatActivity {
         int defaultItem = 0;
         selectedItems.add(defaultItem);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Ucheck 알람 시간 설정");
         builder.setSingleChoiceItems(items, defaultItem, new DialogInterface.OnClickListener() {
             @Override
@@ -216,10 +182,10 @@ public class MypageActivity extends AppCompatActivity {
                         m_time = 1;
                     }
                     //설정된 시간 안내 Toast
-                    Toast.makeText(MypageActivity.this, "alarm set in" + m_time + "seconds", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "alarm set in" + m_time + "seconds", Toast.LENGTH_SHORT).show();
                 }else{
                     //항목을 선택하세요 안내
-                    Toast.makeText(MypageActivity.this, "항목을 선택하세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "항목을 선택하세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -236,12 +202,12 @@ public class MypageActivity extends AppCompatActivity {
     }
 
     public void alarmWork(int time){
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        AlarmManager am = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time * 1000, pendingIntent);
-        Toast.makeText(MypageActivity.this, "Alarm set in" + time + "seconds", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Alarm set in" + time + "seconds", Toast.LENGTH_SHORT).show();
     }
 
     private void updateDisplay(){
@@ -281,14 +247,12 @@ public class MypageActivity extends AppCompatActivity {
         }
     };
 
-
+/*
     @Override
     protected Dialog onCreateDialog(int id){
         if(id==DATE_DIALOG_ID){
             return new DatePickerDialog(this,dDateSetListener,tYear,tMonth,tDay);
         }
         return null;
-    }
+    }*/
 }
-
-

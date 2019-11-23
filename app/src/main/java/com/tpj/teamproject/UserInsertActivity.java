@@ -26,93 +26,13 @@ public class UserInsertActivity extends AppCompatActivity {
 
 
 
-    RecyclerView completeRecyclerView, noCompleteRecyclerView;
-    LinearLayoutManager completeLayoutManager, noCompleteLayoutManager;
-    CompleteListAdapter completeAdapter;
-    NoCompleteListAdapter noCompleteAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_insert);
-        setComplete();
-        setNoComplete();
-        completeAdapter.noAdapter = noCompleteAdapter;
-        noCompleteAdapter.compAdapter = completeAdapter;
+
 
     }
 
-    private ArrayList<String> getStringArrayPref(){
-        SharedPreferences prefs = getSharedPreferences("sugang",Context.MODE_PRIVATE);
-        String json = prefs.getString("sugang",null);
-        ArrayList<String> source = new ArrayList<>();
-        if(json != null){
-            try{
-                JSONArray a = new JSONArray(json);
-                 for(int i = 0; i< a.length(); i++){
-                     String url = a.optString(i);
-                     source.add(url);
-                 }
-            }catch (JSONException e){
-            }
-        }
-        return source;
-    }
-
-    private void setComplete(){
-        completeRecyclerView = findViewById(R.id.recycler_user_complete);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        completeRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        completeLayoutManager = new LinearLayoutManager(this);
-        completeRecyclerView.setLayoutManager(completeLayoutManager);
-
-        // specify an adapter (see also next example)
-
-        ArrayList<String> list =  getStringArrayPref();
-        completeAdapter = new CompleteListAdapter(list,this);
-
-        completeRecyclerView.setAdapter(completeAdapter);
-    }
-
-    private void setNoComplete(){
-        noCompleteRecyclerView = findViewById(R.id.recycler_user_no_complete);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        noCompleteRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        noCompleteLayoutManager = new LinearLayoutManager(this);
-        noCompleteRecyclerView.setLayoutManager(noCompleteLayoutManager);
-
-        // specify an adapter (see also next example)
-        noCompleteAdapter = new NoCompleteListAdapter(createComputerEngList());
-        noCompleteRecyclerView.setAdapter(noCompleteAdapter);
-    }
-
-    ArrayList<String> createComputerEngList(){
-        ArrayList<String> arrayList = new ArrayList<>();
-        for(String course : courses ){
-            arrayList.add(course);
-        }
-        return arrayList;
-    }
-
-    public void saveData(ArrayList<String> source){
-        SharedPreferences prefs = getSharedPreferences("sugang", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        JSONArray jsonArray = new JSONArray();
-        for(String s : source){
-            jsonArray.put(s);
-        }
-        if(!source.isEmpty()){
-            editor.putString("sugang", jsonArray.toString());
-        }else{
-            editor.putString("sugang",null);
-        }
-        editor.apply();
-    }
 }
