@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.MyViewHolder> {
     ArrayList<SuGangDTO> mDataset;
+    SuGangFragment mFragment;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -35,8 +36,9 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SuGangListAdapter(ArrayList<SuGangDTO> myDataset) {
+    public SuGangListAdapter(SuGangFragment fragment, ArrayList<SuGangDTO> myDataset) {
         mDataset = myDataset;
+        mFragment = fragment;
     }
 
     // Create new views (invoked by the layout manager)
@@ -65,6 +67,7 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
             @Override
             public void onClick(View v) {
                 mDataset.get(position).grade = Double.parseDouble(holder.editGrade.getText().toString());
+
             }
         });
 
@@ -81,6 +84,7 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
             holder.editGrade.setHint("학점 입력");
         }else{
             holder.editGrade.setText(String.valueOf(mDataset.get(position).grade));
+            mFragment.updateUI();
         }
     }
 

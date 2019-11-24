@@ -1,21 +1,38 @@
 package com.tpj.teamproject;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class HomeFragment extends Fragment {
+    public View mView;
+
+    public TextView name;
+
+    public RecyclerView cRecyclerView;
+    public RecyclerView.LayoutManager cLayoutManager;
+    public EclassCourseAdapter  cAdapter;
+    public TextView noCourse;
+
+
+
     private ProgressBar finalProgressBar;
     public HomeFragment() {
 
@@ -24,9 +41,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        finalProgressBar = view.findViewById(R.id.main_progress_final);
+        finalProgressBar = mView.findViewById(R.id.main_progress_final);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String startDate = "2019-09-02";
@@ -37,9 +54,33 @@ public class HomeFragment extends Fragment {
         long data2 = calculateDate(format,startDate,endDate);
         long data3 = (data1*100/data2);
 
+        final String id = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE).getString("inputID",null);
+        final String pw = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE).getString("inputPW",null);
+
+        new EclassManager(this,id,pw);
+
+        noCourse = mView.findViewById(R.id.no_course);
+
 
         finalProgressBar.setProgress(100-(int)data3);
-        return view;
+        return mView;
+    }
+
+    public void setCourse(HashMap<String, Course> courses){
+        cAdapter = new EclassCourseAdapter(this,courses);
+
+        cRecyclerView = mView.findViewById(R.id.course_recycler);
+        cRecyclerView.setHasFixedSize(true);
+
+        cLayoutManager = new LinearLayoutManager(getContext());
+
+        cRecyclerView.setLayoutManager(cLayoutManager);
+        cRecyclerView.setAdapter(cAdapter);
+
+        if(courses.isEmpty()){
+            cRecyclerView.setVisibility(View.GONE);
+            noCourse.setVisibility(View.VISIBLE);
+        }
     }
 
 

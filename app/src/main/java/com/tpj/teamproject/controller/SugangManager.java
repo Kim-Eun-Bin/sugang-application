@@ -3,7 +3,7 @@ package com.tpj.teamproject.controller;
 import java.util.ArrayList;
 
 public class SugangManager {
-    public static ArrayList<SuGangDTO> initSuGangList(){
+    public static ArrayList<SuGangDTO> initMajorList(){
         ArrayList<SuGangDTO> list = new ArrayList<>();
         //                 과목명     학점(점수) 학점(시간)
         list.add(new SuGangDTO("C언어프로그래밍",-1,4));
@@ -56,6 +56,53 @@ public class SugangManager {
         list.add(new SuGangDTO("ICT학점이수인턴제1",-1,12));
         list.add(new SuGangDTO("ICT학점이수인턴제1",-1,4));
         list.add(new SuGangDTO("ICT학점이수인턴제2",-1,3));
+
+        return list;
+    }
+
+    public static ArrayList<SuGangDTO> initMSCList(){
+        ArrayList<SuGangDTO> list = new ArrayList<>();
+        //                 과목명     학점(점수) 학점(시간)
+        list.add(new SuGangDTO("미적분학1",-1,3));
+        list.add(new SuGangDTO("공학수학1",-1,3));
+        list.add(new SuGangDTO("통계학개론",-1,3));
+        list.add(new SuGangDTO("선형대수학개론",-1,3));
+        list.add(new SuGangDTO("이산수학개론",-1,3));
+        list.add(new SuGangDTO("물리학1",-1,3));
+        list.add(new SuGangDTO("물리학실험1",-1,1));
+
+        return list;
+    }
+
+    public static ArrayList<SuGangDTO> initSuper_RefinementList(){
+        ArrayList<SuGangDTO> list = new ArrayList<>();
+        //                 과목명     학점(점수) 학점(시간)
+        list.add(new SuGangDTO("글쓰기",-1,3));
+        list.add(new SuGangDTO("발표와토의",-1,3));
+        list.add(new SuGangDTO("영어1",-1,2));
+        list.add(new SuGangDTO("영어2",-1,2));
+        list.add(new SuGangDTO("영어3",-1,2));
+        list.add(new SuGangDTO("영어4",-1,2));
+        list.add(new SuGangDTO("영어회화1",-1,1));
+        list.add(new SuGangDTO("영어회화2",-1,1));
+        list.add(new SuGangDTO("영어회화3",-1,1));
+        list.add(new SuGangDTO("영어회화4",-1,1));
+        list.add(new SuGangDTO("철학과인간",-1,3));
+        list.add(new SuGangDTO("한국근현대사의이해",-1,3));
+        list.add(new SuGangDTO("역사와문명",-1,3));
+        list.add(new SuGangDTO("세계화와사회변화",-1,3));
+        list.add(new SuGangDTO("민주주의와현대사회",-1,3));
+        list.add(new SuGangDTO("첨단과학의이해",-1,3));
+        list.add(new SuGangDTO("환경과인간",-1,3));
+        list.add(new SuGangDTO("창업인문",-1,3));
+        list.add(new SuGangDTO("글로벌문화",-1,3));
+        list.add(new SuGangDTO("고전으로읽는인문학",-1,3));
+        list.add(new SuGangDTO("여성소수자공동체",-1,3));
+        list.add(new SuGangDTO("예술과창조성",-1,3));
+        list.add(new SuGangDTO("인공지능의세계",-1,3));
+        list.add(new SuGangDTO("4차산업혁명의이해",-1,3));
+        list.add(new SuGangDTO("4차산업혁명을위한비판적사고와비판",-1,3));
+
 
         return list;
     }

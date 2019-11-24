@@ -42,6 +42,25 @@
             android:layout_height="wrap_content"
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
             android:progress="25"/>
+
+        <FrameLayout
+            android:id="@+id/eclass_course_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6sp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/course_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/no_course"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록된 강좌가 없습니다."/>
+        </FrameLayout>
     </LinearLayout>
 
 </FrameLayout>

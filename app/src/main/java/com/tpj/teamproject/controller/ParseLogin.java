@@ -14,8 +14,8 @@ import static com.tpj.teamproject.common.Url.LOGIN_URL;
 import static com.tpj.teamproject.common.Url.USER_AGENT;
 
 public class ParseLogin {
-    String userID;
-    String userPW;
+    protected String userID;
+    protected String userPW;
 
     boolean isValid;
 

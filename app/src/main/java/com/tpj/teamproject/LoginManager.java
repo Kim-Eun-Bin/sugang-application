@@ -49,7 +49,7 @@ public class LoginManager  extends AsyncTask<Void,Void,Void> {
                                         PreferenceManager.saveUID(activity,task.getResult().getUser().getUid());
 
                                         Log.d("firebase login","아이디 생성 성공");
-                                        //activity.finish();
+                                        //mFragment.finish();
                                     }else{
                                         Log.d("firebase login","아이디 생성 실패");
                                     }
