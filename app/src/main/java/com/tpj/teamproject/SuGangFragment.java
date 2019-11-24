@@ -153,6 +153,10 @@ public class SuGangFragment extends Fragment {
         return list;
     }
 
+    /*
+    * static으로 선언된 DB_MSC, DB_MAJOR, DB_SUPER 도 같이 가져댜가 밑에 함수 응용해서 홈 화면에 가져다가 쓰면 됩니다.
+    * 파이어베이스 작동 방식이 비동기로 진행되기 때문에 onDataChange에서 ui 변경하는 작업도 같이 해줘야 합니다.
+    * */
     public void setToTalScore(){
         if(!scoreFlag) return;
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
