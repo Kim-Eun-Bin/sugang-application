@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +27,10 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
         public TextView textView, textSaveSuGang;
         public RadioButton radioIsComplete;
         public EditText editGrade;
+        public View view;
         public MyViewHolder(View v) {
             super(v);
+            this.view = v;
             textView = v.findViewById(R.id.item_sugang_name);
             radioIsComplete = v.findViewById(R.id.radio_sugang_isComplete);
             editGrade = v.findViewById(R.id.edit_sugang_grade);
@@ -67,7 +70,12 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
             @Override
             public void onClick(View v) {
                 mDataset.get(position).grade = Double.parseDouble(holder.editGrade.getText().toString());
-
+                if(!mDataset.get(position).isComplete){
+                    mDataset.get(position).isComplete = true;
+                }
+                mFragment.updateUI();
+                notifyDataSetChanged();
+                Toast.makeText(holder.view.getContext(), "학점이 저장되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -84,7 +92,7 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
             holder.editGrade.setHint("학점 입력");
         }else{
             holder.editGrade.setText(String.valueOf(mDataset.get(position).grade));
-            mFragment.updateUI();
+            //mFragment.updateUI();
         }
     }
 

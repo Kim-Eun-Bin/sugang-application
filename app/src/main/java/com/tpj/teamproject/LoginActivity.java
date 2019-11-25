@@ -17,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
     Button loginButton;
-    TextView afterLoginButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login);
-        afterLoginButton = findViewById(R.id.afterlogin);
 
         SharedPreferences pref = getSharedPreferences("auth",Context.MODE_PRIVATE);
         usernameEditText.setText(pref.getString("inputID",""));
@@ -48,14 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 String pw = passwordEditText.getText().toString();
                 new LoginManager(LoginActivity.this,id,pw);
 
-
-            }
-        });
-
-        afterLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
             }
         });

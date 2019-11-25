@@ -41,7 +41,7 @@ public class SuGangFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference reference;
 
-    TextView textMajor, textMSC, textSuper, textTotalScore;
+    TextView textMajor, textMSC, textSuper, textTotalScore, textReset;
     Button buttonSave;
 
     double totalScore = 0.0;
@@ -66,17 +66,19 @@ public class SuGangFragment extends Fragment {
         textMSC = mView.findViewById(R.id.text_sugang_msc);
         textSuper = mView.findViewById(R.id.text_sugang_super);
         textTotalScore = mView.findViewById(R.id.text_sugang_total_score);
+        textReset = mView.findViewById(R.id.text_reset);
 
         boolean isFirst = getActivity().getSharedPreferences("isFirst",Context.MODE_PRIVATE).getBoolean("isFirst",true);
         if(isFirst){
             initUserDatabase();
         }
-
+        currentDB = DB_MAJOR;
         getList(DB_MAJOR);
         setToTalScore();
         textMajor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentDB = DB_MAJOR;
                 getList(DB_MAJOR);
             }
         });
@@ -84,6 +86,7 @@ public class SuGangFragment extends Fragment {
         textMSC.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                currentDB = DB_MSC;
                 getList(DB_MSC);
             }
         });
@@ -91,6 +94,7 @@ public class SuGangFragment extends Fragment {
         textSuper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentDB = DB_SUPER;
                 getList(DB_SUPER);
             }
         });
@@ -102,10 +106,19 @@ public class SuGangFragment extends Fragment {
             }
 
         });
+
+        textReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initUserDatabase();
+                updateUI();
+            }
+        });
+
         return mView;
     }
 
-    public void initUserDatabase(){
+    private void initUserDatabase(){
         final ArrayList<SuGangDTO> listMajor = SugangManager.initMajorList();
         final ArrayList<SuGangDTO> listMsc = SugangManager.initMSCList();
         final ArrayList<SuGangDTO> listSuper = SugangManager.initSuper_RefinementList();
@@ -125,10 +138,9 @@ public class SuGangFragment extends Fragment {
         getActivity().getSharedPreferences("isFirst",Context.MODE_PRIVATE).edit().putBoolean("isFirst",false).apply();
     }
 
-    public ArrayList<SuGangDTO> getList(String where){
-        currentDB = where;
+    private ArrayList<SuGangDTO> getList(String where){
         final ArrayList<SuGangDTO>list = new ArrayList<>();
-        reference.child(where).addValueEventListener(new ValueEventListener() {
+        reference.child(where).orderByChild("semester").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 sugangListRecyclerView = mView.findViewById(R.id.recycler_yet_sugang_list);
@@ -141,6 +153,7 @@ public class SuGangFragment extends Fragment {
                     SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
                     list.add(sugang);
                 }
+
                 noCompleteAdapter = new SuGangListAdapter(SuGangFragment.this,list);
                 sugangListRecyclerView.setAdapter(noCompleteAdapter);
             }
@@ -158,7 +171,7 @@ public class SuGangFragment extends Fragment {
     * 파이어베이스 작동 방식이 비동기로 진행되기 때문에 onDataChange에서 ui 변경하는 작업도 같이 해줘야 합니다.
     * */
     public void setToTalScore(){
-        if(!scoreFlag) return;
+        //if(!scoreFlag) return;
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

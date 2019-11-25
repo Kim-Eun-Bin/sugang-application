@@ -3,26 +3,41 @@ package com.tpj.teamproject;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.tpj.teamproject.controller.SuGangDTO;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -30,9 +45,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class MyPageFragment extends Fragment {
-
     View mView;
-
+/*
     private int m_time = 0;
     private TextView ddayText;
     private TextView todayText;
@@ -64,15 +78,15 @@ public class MyPageFragment extends Fragment {
     static final int DATE_DIALOG_ID=0;
     private  int count = 1;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView =  inflater.inflate(R.layout.fragment_my_page, container, false);
-        // Inflate the layout for this fragment
+*/
 
-        //ProgressBar pgBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        switch1 = mView.findViewById(R.id.switch1);
+
+    // Inflate the layout for this fragment
+
+    //ProgressBar pgBar = (ProgressBar) findViewById(R.id.progressBar);
+
+       /* switch1 = mView.findViewById(R.id.switch1);
         ddayText = mView.findViewById(R.id.dday);
         todayText = mView.findViewById(R.id.today);
         resultText = mView.findViewById(R.id.result);
@@ -115,12 +129,168 @@ public class MyPageFragment extends Fragment {
             }
         });
         loadDate();
-        updateViews();
+        updateViews();*/
+
+
+
+    private static String DB_MSC = "msc";
+    private static String DB_MAJOR = "major";
+    private static String DB_SUPER = "super";
+
+    boolean finishFlag = false;
+
+    ArrayList<SuGangDTO> listMajor = new ArrayList<>();
+    ArrayList<SuGangDTO> listMsc= new ArrayList<>();
+    ArrayList<SuGangDTO> listSuper = new ArrayList<>();
+
+    //1.안들은거 2.학년학기 3.전공,MSC,교양
+
+    EditText editScore;
+    TextView textSave, textRecomend;
+    String uid;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        uid = getActivity().getSharedPreferences("uid", Context.MODE_PRIVATE).getString("uid",null);
+
+        mView =  inflater.inflate(R.layout.fragment_my_page, container, false);
+        editScore = mView.findViewById(R.id.edit_my_page_score);
+        textSave = mView.findViewById(R.id.text_my_page_score_save);
+        textRecomend = mView.findViewById(R.id.text_my_page_recomend);
+
+        textSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child(uid).child("config").child("goal_score");
+                ref.setValue(Double.valueOf(editScore.getText().toString()));
+                Toast.makeText(getContext(), "목표 학점이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("user").child(uid).child("config").child("goal_score").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(editScore != null)
+                    editScore.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        textRecomend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(finishFlag){
+                    String str = "전공 " ;
+                    for(SuGangDTO s : recomendList()){
+                        if(recomendList().get(0).semester == s.semester)
+                            str += s.name + ",";
+                    }
+                    textRecomend.setText(str);
+                }
+            }
+        });
+
+        setToTalScore();
+        getNoComplete();
 
         return mView;
     }
 
 
+    public void getNoComplete(){
+        FirebaseDatabase.getInstance().getReference()
+                .child("user").child(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
+                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
+                        listMajor.add(suGangDTO);
+                }
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
+                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
+                        listMsc.add(suGangDTO);
+                }
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
+                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
+                        listSuper.add(suGangDTO);
+                }
+                finishFlag = true;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    public ArrayList<SuGangDTO> recomendList(){
+        ArrayList<SuGangDTO> result = new ArrayList<>();
+
+        for(SuGangDTO suGangDTO : listMajor){
+            if(!suGangDTO.isComplete){
+                result.add(suGangDTO);
+            }
+        }
+        Collections.sort(result);
+        return result;
+
+    }
+
+
+    public void setToTalScore(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(uid);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                double totalScore = 0;
+                double totalTime = 0;
+
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
+                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    if(sugang.isComplete){
+                        totalScore += (sugang.grade*sugang.time);
+                        totalTime += (sugang.time);
+                    }
+                }
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
+                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    if(sugang.isComplete){
+                        totalScore += sugang.grade*sugang.time;
+                        totalTime += sugang.time;
+                    }
+                }
+                for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
+                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    if(sugang.isComplete){
+                        totalScore += sugang.grade*sugang.time;
+                        totalTime += sugang.time;
+                    }
+                }
+                updateTotalScore(totalScore,totalTime);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    void updateTotalScore(double totalScore, double totalTime){
+        double total = totalScore / totalTime;
+
+    }
+}
+
+/*
     public void saveData(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences .Editor editor = sharedPreferences.edit();
@@ -246,7 +416,7 @@ public class MyPageFragment extends Fragment {
             updateDisplay();
         }
     };
-
+*/
 /*
     @Override
     protected Dialog onCreateDialog(int id){
@@ -255,4 +425,4 @@ public class MyPageFragment extends Fragment {
         }
         return null;
     }*/
-}
+

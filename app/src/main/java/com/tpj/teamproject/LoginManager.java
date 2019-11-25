@@ -12,14 +12,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.tpj.teamproject.controller.ParseLogin;
 import com.tpj.teamproject.controller.PreferenceManager;
-import com.tpj.teamproject.controller.SuGangDTO;
-import com.tpj.teamproject.controller.SugangManager;
-
-import java.util.ArrayList;
 
 public class LoginManager  extends AsyncTask<Void,Void,Void> {
     protected Activity activity;
