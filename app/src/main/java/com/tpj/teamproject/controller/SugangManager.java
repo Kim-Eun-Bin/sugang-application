@@ -79,14 +79,10 @@ public class SugangManager {
         //                 과목명     학점(점수) 학점(시간)
         list.add(new SuGangDTO("글쓰기",-1,3,51));
         list.add(new SuGangDTO("발표와토의",-1,3,51));
-        list.add(new SuGangDTO("영어1",-1,2,11));
-        list.add(new SuGangDTO("영어2",-1,2,12));
-        list.add(new SuGangDTO("영어3",-1,2,11));
-        list.add(new SuGangDTO("영어4",-1,2,12));
-        list.add(new SuGangDTO("영어회화1",-1,1,11));
-        list.add(new SuGangDTO("영어회화2",-1,1,12));
-        list.add(new SuGangDTO("영어회화3",-1,1,11));
-        list.add(new SuGangDTO("영어회화4",-1,1,12));
+        list.add(new SuGangDTO("영어1(영어3)",-1,2,11));
+        list.add(new SuGangDTO("영어2(영어4)",-1,2,12));
+        list.add(new SuGangDTO("영어회화1(영어회화3)",-1,1,11));
+        list.add(new SuGangDTO("영어회화2(영어회화4)",-1,1,12));
         list.add(new SuGangDTO("철학과인간",-1,3,51));
         list.add(new SuGangDTO("한국근현대사의이해",-1,3,51));
         list.add(new SuGangDTO("역사와문명",-1,3,51));

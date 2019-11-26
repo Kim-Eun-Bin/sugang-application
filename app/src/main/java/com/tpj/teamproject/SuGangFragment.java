@@ -124,17 +124,17 @@ public class SuGangFragment extends Fragment {
         final ArrayList<SuGangDTO> listSuper = SugangManager.initSuper_RefinementList();
 
         for(SuGangDTO sugang : listMajor){
-            System.out.println(sugang.name);
             reference.child(DB_MAJOR).child(sugang.name).setValue(sugang.toMap());
         }
+
         for(SuGangDTO sugang : listMsc){
-            System.out.println(sugang.name);
             reference.child(DB_MSC).child(sugang.name).setValue(sugang.toMap());
         }
+
         for(SuGangDTO sugang : listSuper){
-            System.out.println(sugang.name);
             reference.child(DB_SUPER).child(sugang.name).setValue(sugang.toMap());
         }
+
         getActivity().getSharedPreferences("isFirst",Context.MODE_PRIVATE).edit().putBoolean("isFirst",false).apply();
     }
 
@@ -199,7 +199,6 @@ public class SuGangFragment extends Fragment {
                         totalTime += sugang.time;
                     }
                 }
-                System.out.println("total : "+totalScore);
                 if(textTotalScore != null){
                     totalScore = totalScore / totalTime;
                     textTotalScore.setText(String.valueOf(totalScore));

@@ -61,7 +61,11 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.textView.setText(mDataset.get(position).name);
+        String str = String.valueOf(mDataset.get(position).semester);
+
+        String semester = str.toCharArray()[0] + "-" + str.toCharArray()[1] + "   ";
+
+        holder.textView.setText(semester + mDataset.get(position).name);
 
         holder.radioIsComplete.setChecked(mDataset.get(position).isComplete);
 

@@ -18,12 +18,12 @@ public class Course implements Serializable {
             this.time = time;
         }
 
+
         @Override
         public String toString(){
             return "::"+day+"::"+time+"\n";
         }
     }
-
     public Course(int number, String title, String time, String url){
         this.title = title;
         this.number = number;

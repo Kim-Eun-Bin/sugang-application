@@ -43,8 +43,10 @@ public class SuGangDTO implements Comparable<SuGangDTO>{
     public int compareTo(SuGangDTO o) {
         if(this.semester < o.semester){
             return -1;
-        }else{
+        }else if(this.semester > o.semester){
             return 1;
+        }else{
+            return 0;
         }
     }
 }

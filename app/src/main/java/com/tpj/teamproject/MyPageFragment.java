@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,16 +138,21 @@ public class MyPageFragment extends Fragment {
     private static String DB_MAJOR = "major";
     private static String DB_SUPER = "super";
 
+    private static double GOAL_MAJOR_TIME  = 84;
+    private static double GOAL_MSC_TIME    = 19;
+    private static double GOAL_SUPER_TIME  = 21;
+
+
     boolean finishFlag = false;
 
-    ArrayList<SuGangDTO> listMajor = new ArrayList<>();
-    ArrayList<SuGangDTO> listMsc= new ArrayList<>();
-    ArrayList<SuGangDTO> listSuper = new ArrayList<>();
+    ArrayList<SuGangDTO> listMajor;
+    ArrayList<SuGangDTO> listMsc;
+    ArrayList<SuGangDTO> listSuper;
 
     //1.안들은거 2.학년학기 3.전공,MSC,교양
 
     EditText editScore;
-    TextView textSave, textRecomend;
+    TextView textSave, textRecomend, textRemainMajor, textRemainMSC, textRemainSuper, textTotalTime, textRetake;
     String uid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,6 +163,13 @@ public class MyPageFragment extends Fragment {
         editScore = mView.findViewById(R.id.edit_my_page_score);
         textSave = mView.findViewById(R.id.text_my_page_score_save);
         textRecomend = mView.findViewById(R.id.text_my_page_recomend);
+        textRetake = mView.findViewById(R.id.text_my_page_retake);
+        textRemainMajor = mView.findViewById(R.id.text_my_page_remain_major);
+        textRemainMSC = mView.findViewById(R.id.text_my_page_remain_msc);
+        textRemainSuper = mView.findViewById(R.id.text_my_page_remain_super);
+        textTotalTime = mView.findViewById(R.id.text_my_page_total_time);
+
+        finishFlag = false;
 
         textSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,13 +197,30 @@ public class MyPageFragment extends Fragment {
         textRecomend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(finishFlag){
-                    String str = "전공 " ;
-                    for(SuGangDTO s : recomendList()){
-                        if(recomendList().get(0).semester == s.semester)
-                            str += s.name + ",";
+                if(finishFlag) {
+                    String str = "-미수강 과목- \n";
+                    ArrayList<SuGangDTO> arrayList = recomendList();
+                    for (SuGangDTO s : arrayList) {
+                        if (arrayList.get(0).semester == s.semester)
+                            str += s.name + "\n";
                     }
+                    str += "\n";
                     textRecomend.setText(str);
+
+                }
+            }
+        });
+
+        textRetake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(finishFlag) {
+                    String str = "-재수강이 필요한 과목- \n";
+                    ArrayList<SuGangDTO> retakeList = retakeList();
+                    for (SuGangDTO s : retakeList) {
+                        str += s.name + "\n";
+                    }
+                    textRetake.setText(str);
                 }
             }
         });
@@ -203,6 +233,9 @@ public class MyPageFragment extends Fragment {
 
 
     public void getNoComplete(){
+        listMajor = new ArrayList<>();
+        listMsc = new ArrayList<>();
+        listSuper = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference()
                 .child("user").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -239,42 +272,83 @@ public class MyPageFragment extends Fragment {
                 result.add(suGangDTO);
             }
         }
+
+        for(SuGangDTO suGangDTO : listMsc){
+            if(!suGangDTO.isComplete){
+                result.add(suGangDTO);
+            }
+        }
+
+        for(SuGangDTO suGangDTO : listSuper){
+            if(!suGangDTO.isComplete){
+                result.add(suGangDTO);
+            }
+        }
+
         Collections.sort(result);
         return result;
+    }
 
+    public ArrayList<SuGangDTO> retakeList(){
+        ArrayList<SuGangDTO> result = new ArrayList<>();
+
+        for(SuGangDTO suGangDTO : listMajor){
+            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
+                result.add(suGangDTO);
+            }
+        }
+
+        for(SuGangDTO suGangDTO : listMsc){
+            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
+                result.add(suGangDTO);
+            }
+        }
+
+        for(SuGangDTO suGangDTO : listSuper){
+            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
+                result.add(suGangDTO);
+            }
+        }
+        Collections.sort(result);
+
+        return result;
     }
 
 
     public void setToTalScore(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(uid);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user").child(uid);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                double totalScore = 0;
-                double totalTime = 0;
+                double scoreMajor = 0;
+                double scoreMSC = 0;
+                double scoreSuper = 0;
+                double timeMajor = 0;
+                double timeMSC = 0;
+                double timeSuper = 0;
 
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
                     SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
                     if(sugang.isComplete){
-                        totalScore += (sugang.grade*sugang.time);
-                        totalTime += (sugang.time);
+                        scoreMajor += (sugang.grade*sugang.time);
+                        timeMajor += sugang.time;
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
                     SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
                     if(sugang.isComplete){
-                        totalScore += sugang.grade*sugang.time;
-                        totalTime += sugang.time;
+                        scoreMSC += sugang.grade*sugang.time;
+                        timeMSC += sugang.time;
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
                     SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
                     if(sugang.isComplete){
-                        totalScore += sugang.grade*sugang.time;
-                        totalTime += sugang.time;
+                        scoreSuper += sugang.grade*sugang.time;
+                        timeSuper += sugang.time;
                     }
                 }
-                updateTotalScore(totalScore,totalTime);
+                updateTotalScore(scoreMajor,scoreMSC,scoreSuper,timeMajor,timeMSC,timeSuper);
             }
 
             @Override
@@ -284,8 +358,12 @@ public class MyPageFragment extends Fragment {
         });
     }
 
-    void updateTotalScore(double totalScore, double totalTime){
-        double total = totalScore / totalTime;
+    void updateTotalScore(double scoreMajor, double scoreMSC, double scoreSuper, double timeMajor, double timeMSC, double timeSuper){
+        textTotalTime.setText(timeMajor+timeMSC+timeSuper+"학점");
+
+        textRemainMajor.setText("전공 : " +  (GOAL_MAJOR_TIME - timeMajor) + "학점");
+        textRemainMSC.setText("MSC : " + (GOAL_MSC_TIME -timeMSC) + "학점");
+        textRemainSuper.setText("전문교양 : " + (GOAL_SUPER_TIME - timeSuper)  + "학점");
 
     }
 }

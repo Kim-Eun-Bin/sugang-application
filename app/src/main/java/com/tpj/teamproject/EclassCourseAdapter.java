@@ -43,7 +43,6 @@ public class EclassCourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int i) {
         final EclassCourseAdapter.MyViewHolder myViewHolder = (EclassCourseAdapter.MyViewHolder)viewHolder;
         final Course course = (Course)mData.get(i);
-        System.out.println(course.toString());
         myViewHolder.title.setText(course.title);
 
     }
