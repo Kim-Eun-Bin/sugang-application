@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
+            android:textStyle="bold"
             android:text=" 졸업 목표 학점 "/>
         <EditText
             android:id="@+id/edit_my_page_score"
@@ -31,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
+            android:textStyle="bold"
             android:text="저장"/>
     </LinearLayout>
 
@@ -42,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="#000"
+            android:textColor="#000fff"
+            android:textStyle="bold"
             android:text="다음 수강신청 추천 목록"/>
         <ScrollView
             android:layout_width="match_parent"
@@ -85,6 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="20dp"
             android:text="현재까지 수강한 총 학점은?"/>
         <TextView
             android:id="@+id/text_my_page_total_time"
@@ -93,17 +98,22 @@
             android:layout_margin="5dp"
             android:textColor="#FF9999"
             android:clickable="true"
+            android:textStyle="bold"
+            android:textSize="16dp"
             android:text="학점"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="12dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="20dp"
             android:text="졸업까지 남은 공학인증 학점은?"/>
         <TextView
             android:id="@+id/text_my_page_remain_major"
@@ -111,6 +121,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#FF9999"
+            android:textStyle="bold"
+            android:textSize="16dp"
             android:clickable="true"
             android:text="전공"/>
         <TextView
@@ -119,16 +131,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#FF9999"
+            android:textStyle="bold"
+            android:textSize="16dp"
             android:clickable="true"
-            android:text="학점"/>
+            android:text="MSC"/>
         <TextView
             android:id="@+id/text_my_page_remain_super"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#FF9999"
+            android:textStyle="bold"
+            android:textSize="16dp"
             android:clickable="true"
-            android:text="학점"/>
+            android:text="전문교양"/>
     </LinearLayout>
 
 

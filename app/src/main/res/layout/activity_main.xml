@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -17,7 +18,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorBackground"
+        android:elevation="6dp">
         <ImageView
             android:id="@+id/main_button_home"
             android:layout_weight="1"
@@ -26,7 +29,8 @@
             android:textSize="16sp"
             android:clickable="true"
             android:background="@null"
-            android:src="@drawable/ic_home_black_24dp" />
+            android:src="@drawable/ic_home_black_24dp"
+            android:tint="@color/colorNormal"/>
         <ImageView
             android:id="@+id/main_button_sugang"
             android:layout_weight="1"
@@ -35,7 +39,8 @@
             android:textSize="16sp"
             android:clickable="true"
             android:background="@null"
-            android:src="@drawable/ic_computer_black_24dp" />
+            android:src="@drawable/ic_computer_black_24dp"
+            android:tint="@color/colorNormal"/>
         <ImageView
             android:id="@+id/main_button_mypage"
             android:layout_weight="1"
@@ -44,7 +49,8 @@
             android:textSize="16sp"
             android:clickable="true"
             android:background="@null"
-            android:src="@drawable/ic_more_horiz_black_24dp" />
+            android:src="@drawable/ic_more_horiz_black_24dp"
+            android:tint="@color/colorNormal"/>
     </LinearLayout>
 
 

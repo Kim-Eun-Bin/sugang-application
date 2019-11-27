@@ -33,29 +33,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sugangFragment = new SuGangFragment();
         mypageFragment = new MyPageFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment,homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment,mypageFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment,sugangFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().show(homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().hide(mypageFragment).commit();
+        getSupportFragmentManager().beginTransaction().hide(sugangFragment).commit();
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,homeFragment).commit();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.main_button_home:
-                //TODO
-                changeFragment(homeFragment);
+                getSupportFragmentManager().beginTransaction().show(homeFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(mypageFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(sugangFragment).commit();
                 break;
             case R.id.main_button_mypage:
-                //TODO
-                changeFragment(mypageFragment);
+                getSupportFragmentManager().beginTransaction().hide(homeFragment).commit();
+                getSupportFragmentManager().beginTransaction().show(mypageFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(sugangFragment).commit();
                 break;
             case R.id.main_button_sugang:
-                //TODO
-                changeFragment(sugangFragment);
+                getSupportFragmentManager().beginTransaction().hide(homeFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(mypageFragment).commit();
+                getSupportFragmentManager().beginTransaction().show(sugangFragment).commit();
                 break;
         }
     }
-
-    void changeFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,fragment).commit();
-    }
-
 }

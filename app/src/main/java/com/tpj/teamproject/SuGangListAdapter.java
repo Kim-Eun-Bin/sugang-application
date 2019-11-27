@@ -28,7 +28,7 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
         public RadioButton radioIsComplete;
         public EditText editGrade;
         public View view;
-        public MyViewHolder(View v) {
+        public MyViewHolder(View v) { // = item
             super(v);
             this.view = v;
             textView = v.findViewById(R.id.item_sugang_name);
@@ -64,6 +64,10 @@ public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.My
         String str = String.valueOf(mDataset.get(position).semester);
 
         String semester = str.toCharArray()[0] + "-" + str.toCharArray()[1] + "   ";
+
+        if(str.equals("51")){
+            semester= "";
+        }
 
         holder.textView.setText(semester + mDataset.get(position).name);
 

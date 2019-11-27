@@ -42,7 +42,6 @@ public class SuGangFragment extends Fragment {
     DatabaseReference reference;
 
     TextView textMajor, textMSC, textSuper, textTotalScore, textReset;
-    Button buttonSave;
 
     double totalScore = 0.0;
     double totalTime = 0.0;
@@ -61,7 +60,6 @@ public class SuGangFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("user").child(uid);
 
-        buttonSave = mView.findViewById(R.id.btn_sugang_save);
         textMajor = mView.findViewById(R.id.text_sugang_major);
         textMSC = mView.findViewById(R.id.text_sugang_msc);
         textSuper = mView.findViewById(R.id.text_sugang_super);
@@ -97,14 +95,6 @@ public class SuGangFragment extends Fragment {
                 currentDB = DB_SUPER;
                 getList(DB_SUPER);
             }
-        });
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateUI();
-            }
-
         });
 
         textReset.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +191,7 @@ public class SuGangFragment extends Fragment {
                 }
                 if(textTotalScore != null){
                     totalScore = totalScore / totalTime;
-                    textTotalScore.setText(String.valueOf(totalScore));
+                    textTotalScore.setText(String.format("%.2f", totalScore));
                     scoreFlag = false;
                 }
             }
