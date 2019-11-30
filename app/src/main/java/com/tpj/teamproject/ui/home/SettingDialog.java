@@ -1,19 +1,16 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.home;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
 public class SettingDialog extends DialogFragment {
-    private int m_time = 0;
+
 
     private int tYear;           // 현재 연월일 변수
     private int tMonth;

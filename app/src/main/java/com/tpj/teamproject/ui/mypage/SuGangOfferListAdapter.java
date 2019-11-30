@@ -1,4 +1,4 @@
-package com.tpj.teamproject.ui;
+package com.tpj.teamproject.ui.mypage;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,33 +8,27 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tpj.teamproject.R;
-import com.tpj.teamproject.controller.SuGangDTO;
+import com.tpj.teamproject.controller.database.SuGang;
 
 import java.util.ArrayList;
 
 
 public class SuGangOfferListAdapter extends RecyclerView.Adapter<SuGangOfferListAdapter.MyViewHolder> {
-    ArrayList<SuGangDTO> mDataset;
-    // MypageFragment mFragment;
+    ArrayList<SuGang> mDataset;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView textName;
 
         public View view;
 
-        public MyViewHolder(View v) { // = item
+        public MyViewHolder(View v) {
             super(v);
             this.view = v;
             textName = v.findViewById(R.id.item_sugang_offer_name);
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public SuGangOfferListAdapter(ArrayList<SuGangDTO> myDataset) {
+    public SuGangOfferListAdapter(ArrayList<SuGang> myDataset) {
         mDataset = myDataset;
         // mFragment = fragment;
     }
@@ -49,9 +43,6 @@ public class SuGangOfferListAdapter extends RecyclerView.Adapter<SuGangOfferList
     }
 
     public void onBindViewHolder(final SuGangOfferListAdapter.MyViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-
             holder.textName.setText(mDataset.get(position).name);
         }
 

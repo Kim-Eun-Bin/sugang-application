@@ -19,7 +19,6 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="16"
                 android:background="@color/colorPrimaryDark">
 
                 <TextView
@@ -100,7 +99,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -113,7 +111,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -126,7 +123,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -139,7 +135,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -152,7 +147,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -182,7 +176,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday1"
@@ -194,7 +188,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -207,7 +200,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -220,7 +212,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -233,7 +224,6 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -263,8 +253,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday2"
@@ -276,8 +265,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday2"
@@ -289,8 +277,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday2"
@@ -302,8 +289,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday2"
@@ -315,8 +301,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -345,8 +330,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday3"
@@ -358,8 +342,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday3"
@@ -371,8 +354,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday3"
@@ -384,8 +366,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday3"
@@ -397,8 +378,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -427,8 +407,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday4"
@@ -440,8 +419,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday4"
@@ -453,8 +431,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday4"
@@ -466,8 +443,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday4"
@@ -479,8 +455,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -509,8 +484,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday5"
@@ -522,8 +496,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday5"
@@ -535,8 +508,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday5"
@@ -548,8 +520,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday5"
@@ -561,8 +532,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -591,8 +561,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday6"
@@ -604,8 +573,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday6"
@@ -617,8 +585,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday6"
@@ -630,8 +597,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday6"
@@ -643,8 +609,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -673,8 +638,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday7"
@@ -686,8 +650,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday7"
@@ -699,8 +662,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday7"
@@ -712,8 +674,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday7"
@@ -725,8 +686,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -756,8 +716,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday8"
@@ -769,8 +728,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday8"
@@ -782,8 +740,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday8"
@@ -795,8 +752,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday8"
@@ -808,8 +764,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -838,8 +793,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday9"
@@ -851,8 +805,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday9"
@@ -864,8 +817,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday9"
@@ -877,8 +829,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday9"
@@ -890,8 +841,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -920,8 +870,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday10"
@@ -933,8 +882,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday10"
@@ -946,8 +894,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday10"
@@ -959,8 +906,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday10"
@@ -972,8 +918,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -1002,8 +947,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday11"
@@ -1015,8 +959,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday11"
@@ -1028,8 +971,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday11"
@@ -1041,8 +983,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday11"
@@ -1054,8 +995,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </TableRow>
 
             <TableRow
@@ -1084,8 +1024,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tuesday12"
@@ -1097,8 +1036,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/wednesday12"
@@ -1110,8 +1048,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/thursday12"
@@ -1123,8 +1060,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/friday12"
@@ -1134,13 +1070,12 @@
                     android:layout_weight="3"
                     android:background="#FFFFFF"
                     android:gravity="center"
+                    android:text=""
                     android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
             </TableRow>
 
         </TableLayout>
     </LinearLayout>
-
 </FrameLayout>

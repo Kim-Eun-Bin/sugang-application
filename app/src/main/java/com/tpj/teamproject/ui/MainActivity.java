@@ -1,13 +1,16 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+
+import com.tpj.teamproject.ui.home.HomeFragment;
+import com.tpj.teamproject.ui.mypage.MyPageFragment;
+import com.tpj.teamproject.R;
+import com.tpj.teamproject.ui.sugang.SuGangFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView buttonHome;

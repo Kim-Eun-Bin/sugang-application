@@ -1,16 +1,16 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.timetable;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.HashMap;
+import com.tpj.teamproject.ui.home.HomeFragment;
+import com.tpj.teamproject.controller.parser.ParseEclass;
 
 public class EclassManager extends AsyncTask<Void,Void,Void> {
-    Fragment activity;
-    String id, pw;
+    private Fragment activity;
+    private String id, pw;
 
     ProgressDialog asyncDialog;
     public EclassManager(Fragment activity, String id, String pw){
@@ -34,10 +34,6 @@ public class EclassManager extends AsyncTask<Void,Void,Void> {
         final ParseEclass eclass = new ParseEclass(id,pw);
         eclass.init();
 
-
-        //courses = (HashMap<String, Course>) getActivity().getIntent().getSerializableExtra("courses");
-
-
         activity.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -45,9 +41,6 @@ public class EclassManager extends AsyncTask<Void,Void,Void> {
             }
         });
 
-
-
-        //activity.startActivity(new Intent(activity.getContext(),EclassCourseActivity.class).putExtra("courses",eclass.getCourse()));
         return null;
     }
 

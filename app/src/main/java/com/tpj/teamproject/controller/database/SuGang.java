@@ -1,9 +1,9 @@
-package com.tpj.teamproject.controller;
+package com.tpj.teamproject.controller.database;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SuGangDTO implements Comparable<SuGangDTO>{
+public class SuGang implements Comparable<SuGang>{
 
     public String name;
     public double grade;
@@ -11,13 +11,13 @@ public class SuGangDTO implements Comparable<SuGangDTO>{
     public boolean isComplete;
     public int semester;
 
-    SuGangDTO(){}
+    SuGang(){}
 
     /**
      * @param semester 1학년 1학기 -> 11 1학년 2학기 -> 12 2학년 1학기 -> 21 //해당안되는 것 -> 51 ...
      *
      * */
-    SuGangDTO(String name, double grade, int time, int semester){
+    public SuGang(String name, double grade, int time, int semester){
         this.name = name;
         this.grade = grade;
         this.time = time;
@@ -40,7 +40,7 @@ public class SuGangDTO implements Comparable<SuGangDTO>{
     }
 
     @Override
-    public int compareTo(SuGangDTO o) {
+    public int compareTo(SuGang o) {
         if(this.semester < o.semester){
             return -1;
         }else if(this.semester > o.semester){

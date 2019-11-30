@@ -16,20 +16,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SettingActivity" android:theme="@style/Theme.AppCompat.Light.Dialog"/>
-        <activity android:name=".EclassCourseActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".UserInsertActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlarmActivity" />
-        <activity android:name=".MemoActivity" />
+        <activity android:name=".ui.mypage.AlarmActivity" />
     </application>
 
 </manifest>

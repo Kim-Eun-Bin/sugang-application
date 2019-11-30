@@ -1,9 +1,12 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.tpj.teamproject.R;
+import com.tpj.teamproject.ui.login.LoginActivity;
 
 public class SplashActivity extends Activity {
     @Override

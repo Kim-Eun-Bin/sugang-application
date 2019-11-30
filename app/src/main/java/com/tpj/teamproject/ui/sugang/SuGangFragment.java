@@ -1,4 +1,4 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.sugang;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,8 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.tpj.teamproject.controller.SuGangDTO;
-import com.tpj.teamproject.controller.SugangManager;
+import com.tpj.teamproject.R;
+import com.tpj.teamproject.controller.database.SuGang;
 
 import java.util.ArrayList;
 
@@ -30,23 +29,23 @@ public class SuGangFragment extends Fragment {
     private static String DB_MAJOR = "major";
     private static String DB_SUPER = "super";
 
-    String currentDB;
+    private String currentDB;
 
-    View mView;
+    private View mView;
 
-    RecyclerView sugangListRecyclerView;
-    LinearLayoutManager sugangListLayoutManager;
-    SuGangListAdapter noCompleteAdapter;
+    private RecyclerView sugangListRecyclerView;
+    private LinearLayoutManager sugangListLayoutManager;
+    private SuGangListAdapter noCompleteAdapter;
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
 
-    TextView textMajor, textMSC, textSuper, textTotalScore, textReset;
+    private TextView textMajor, textMSC, textSuper, textTotalScore, textReset;
 
-    double totalScore = 0.0;
-    double totalTime = 0.0;
+    private double totalScore = 0.0;
+    private double totalTime = 0.0;
 
-    boolean scoreFlag = true;
+    private boolean scoreFlag = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,27 +108,27 @@ public class SuGangFragment extends Fragment {
     }
 
     private void initUserDatabase(){
-        final ArrayList<SuGangDTO> listMajor = SugangManager.initMajorList();
-        final ArrayList<SuGangDTO> listMsc = SugangManager.initMSCList();
-        final ArrayList<SuGangDTO> listSuper = SugangManager.initSuper_RefinementList();
+        final ArrayList<SuGang> listMajor = SugangManager.initMajorList();
+        final ArrayList<SuGang> listMsc = SugangManager.initMSCList();
+        final ArrayList<SuGang> listSuper = SugangManager.initSuper_RefinementList();
 
-        for(SuGangDTO sugang : listMajor){
+        for(SuGang sugang : listMajor){
             reference.child(DB_MAJOR).child(sugang.name).setValue(sugang.toMap());
         }
 
-        for(SuGangDTO sugang : listMsc){
+        for(SuGang sugang : listMsc){
             reference.child(DB_MSC).child(sugang.name).setValue(sugang.toMap());
         }
 
-        for(SuGangDTO sugang : listSuper){
+        for(SuGang sugang : listSuper){
             reference.child(DB_SUPER).child(sugang.name).setValue(sugang.toMap());
         }
 
         getActivity().getSharedPreferences("isFirst",Context.MODE_PRIVATE).edit().putBoolean("isFirst",false).apply();
     }
 
-    private ArrayList<SuGangDTO> getList(String where){
-        final ArrayList<SuGangDTO>list = new ArrayList<>();
+    private ArrayList<SuGang> getList(String where){
+        final ArrayList<SuGang>list = new ArrayList<>();
         reference.child(where).orderByChild("semester").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,7 +139,7 @@ public class SuGangFragment extends Fragment {
                 sugangListRecyclerView.setLayoutManager(sugangListLayoutManager);
 
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     list.add(sugang);
                 }
 
@@ -156,9 +155,11 @@ public class SuGangFragment extends Fragment {
         return list;
     }
 
-    /*
+    /**
     * static으로 선언된 DB_MSC, DB_MAJOR, DB_SUPER 도 같이 가져댜가 밑에 함수 응용해서 홈 화면에 가져다가 쓰면 됩니다.
     * 파이어베이스 작동 방식이 비동기로 진행되기 때문에 onDataChange에서 ui 변경하는 작업도 같이 해줘야 합니다.
+    *
+    * @author 고승화
     * */
     public void setToTalScore(){
         //if(!scoreFlag) return;
@@ -169,21 +170,21 @@ public class SuGangFragment extends Fragment {
                 totalTime = 0;
 
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         totalScore += (sugang.grade*sugang.time);
                         totalTime += (sugang.time);
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         totalScore += sugang.grade*sugang.time;
                         totalTime += sugang.time;
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         totalScore += sugang.grade*sugang.time;
                         totalTime += sugang.time;
@@ -204,7 +205,7 @@ public class SuGangFragment extends Fragment {
     }
 
     public void updateUI(){
-        for(SuGangDTO sugang : noCompleteAdapter.mDataset){
+        for(SuGang sugang : noCompleteAdapter.mDataset){
             reference.child(currentDB).child(sugang.name).setValue(sugang.toMap());
         }
         setToTalScore();

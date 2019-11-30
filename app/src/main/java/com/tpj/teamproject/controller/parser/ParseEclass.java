@@ -1,17 +1,15 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.controller.parser;
 
-import com.tpj.teamproject.controller.ParseLogin;
+import com.tpj.teamproject.controller.database.Course;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.tpj.teamproject.common.Url.ECLASS;
-import static com.tpj.teamproject.common.Url.ECLASS_COURSE;
+import static com.tpj.teamproject.controller.common.Url.ECLASS_COURSE;
 
 public class ParseEclass extends ParseLogin {
 
@@ -27,26 +25,10 @@ public class ParseEclass extends ParseLogin {
         }
     }
 
-    public HashMap<String,Course> getCourse(){
+    public HashMap<String, Course> getCourse(){
         return getCourseHashMap(course.select("#FrameRight > table > tbody > tr"));
     }
 
-
-    private ArrayList<Eclass> getHomeworkArrayList(Elements elements) {
-        ArrayList<Eclass> list = new ArrayList<>();
-        if(elements.text().contains("없")){
-            return list;
-        }
-        for(Element e : elements){
-            String title =  e.select("li > dl > dt > a > strong").text();
-            String date = e.select("li > dl > dd.date > p > span:nth-child(2)").text();
-            String info = e.select("li > dl > dd.information").text();
-            String comment = e.select("li > dl > dd.comment").text();
-            String href = e.select("li > dl > dt > a").attr("href");
-            list.add(new Eclass(title, date, info, comment, href));
-        }
-        return list;
-    }
 
     private HashMap<String,Course> getCourseHashMap(Elements elements){
         HashMap<String, Course> courses = new HashMap<>();
@@ -54,11 +36,10 @@ public class ParseEclass extends ParseLogin {
             return courses;
         }
         for(Element e : elements){
-            //int number = Integer.parseInt(e.select("td:nth-child(1)").text());
             String title = e.select("td:nth-child(2)").text();
             String time = e.select("td:nth-child(3)").text();
             String url = e.select("td:nth-child(4) > span > a").attr("href");
-            Course c = new Course(0,title,time,url);
+            Course c = new Course(title,time,url);
 
             if(courses.containsKey(title)){
                 courses.get(title).addTime(time);

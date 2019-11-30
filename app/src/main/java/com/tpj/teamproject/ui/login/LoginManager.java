@@ -1,4 +1,4 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.tpj.teamproject.controller.ParseLogin;
+import com.tpj.teamproject.ui.MainActivity;
+import com.tpj.teamproject.controller.parser.ParseLogin;
 import com.tpj.teamproject.controller.PreferenceManager;
 
 public class LoginManager  extends AsyncTask<Void,Void,Void> {

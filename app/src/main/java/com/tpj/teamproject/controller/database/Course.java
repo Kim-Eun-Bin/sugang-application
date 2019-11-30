@@ -1,10 +1,9 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.controller.database;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Course implements Serializable {
-    public int number;
     public String title;
     public ArrayList<CourseTime> times;
     public String url;
@@ -23,9 +22,8 @@ public class Course implements Serializable {
             return "::"+day+"::"+time+"\n";
         }
     }
-    public Course(int number, String title, String time, String url){
+    public Course(String title, String time, String url){
         this.title = title;
-        this.number = number;
         this.times = new ArrayList<>();
         this.url = url;
         this.addTime(time);
@@ -36,14 +34,5 @@ public class Course implements Serializable {
         String time = src.substring(2).trim();
 
         this.times.add(new CourseTime(day,time));
-    }
-
-    @Override
-    public String toString(){
-        String str = "["+title+"]";
-        for(CourseTime time : times){
-            str += (times.toString() + "\n");
-        }
-        return str;
     }
 }

@@ -12,13 +12,6 @@ public class PreferenceManager {
         authEditor.apply();
     }
 
-    static public void setFirstCome(Activity activity){
-        SharedPreferences pref = activity.getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("isFirst",true);
-        editor.apply();
-    }
-
     public static void saveUID(Activity activity, String uid) {
         SharedPreferences pref = activity.getSharedPreferences("uid", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

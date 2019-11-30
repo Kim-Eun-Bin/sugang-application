@@ -1,4 +1,4 @@
-package com.tpj.teamproject.controller;
+package com.tpj.teamproject.controller.parser;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.tpj.teamproject.common.Url.ECLASS;
-import static com.tpj.teamproject.common.Url.ECLASS_RELAYSTATE;
-import static com.tpj.teamproject.common.Url.ECLASS_RSP;
-import static com.tpj.teamproject.common.Url.LOGIN_URL;
-import static com.tpj.teamproject.common.Url.USER_AGENT;
+import static com.tpj.teamproject.controller.common.Url.ECLASS;
+import static com.tpj.teamproject.controller.common.Url.ECLASS_RELAYSTATE;
+import static com.tpj.teamproject.controller.common.Url.ECLASS_RSP;
+import static com.tpj.teamproject.controller.common.Url.LOGIN_URL;
+import static com.tpj.teamproject.controller.common.Url.USER_AGENT;
 
 public class ParseLogin {
     protected String userID;

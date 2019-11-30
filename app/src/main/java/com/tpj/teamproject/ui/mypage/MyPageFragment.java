@@ -1,7 +1,6 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.mypage;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,14 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,13 +29,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.tpj.teamproject.controller.SuGangDTO;
-import com.tpj.teamproject.ui.SuGangOfferListAdapter;
-
-import org.w3c.dom.Text;
+import com.tpj.teamproject.R;
+import com.tpj.teamproject.controller.database.SuGang;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,63 +42,16 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MyPageFragment extends Fragment {
     View mView;
-/*
 
+
+    private int m_time = 0;
     private Switch switch1;
+    Button buttonSetAlarm;
     private boolean switchOnOff;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static  final String SWITCH1 = "switch1";
     public static final String ALARM_TIME = "alarmtime";
-
-    private static final String TAG = "MypageActivity";
-
-
-
-
-
-*/
-
-
-
-    // Inflate the layout for this fragment
-
-    //ProgressBar pgBar = (ProgressBar) findViewById(R.id.progressBar);
-
-       /* switch1 = mView.findViewById(R.id.switch1);
-        ddayText = mView.findViewById(R.id.dday);
-        todayText = mView.findViewById(R.id.today);
-        resultText = mView.findViewById(R.id.result);
-        dateButton = mView.findViewById(R.id.dateButton);
-
-        dateButton.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                //showDialog(0);//----------------
-            }
-        });
-
-
-
-
-        updateDisplay();
-        //  Toast.makeText(getApplicationContext(),resultNumber,Toast.LENGTH_SHORT).show();
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    alarmWork(m_time);
-                }
-                saveData();
-            }
-        });
-        loadDate();
-        updateViews();*/
-
-
 
     private static String DB_MSC = "msc";
     private static String DB_MAJOR = "major";
@@ -118,19 +64,15 @@ public class MyPageFragment extends Fragment {
 
     boolean finishFlag = false;
 
-    ArrayList<SuGangDTO> listMajor;
-    ArrayList<SuGangDTO> listMsc;
-    ArrayList<SuGangDTO> listSuper;
+    private ArrayList<SuGang> listMajor, listMsc, listSuper;
 
-    //1.안들은거 2.학년학기 3.전공,MSC,교양
+    private EditText editScore;
+    private TextView textSave, textRecomend, textRemainMajor, textRemainMSC, textRemainSuper, textTotalTime, textRetake;
+    private String uid;
+    private RecyclerView recyclerOffer, recyclerOfferRetake;
 
-    EditText editScore;
-    TextView textSave, textRecomend, textRemainMajor, textRemainMSC, textRemainSuper, textTotalTime, textRetake;
-    String uid;
-    RecyclerView recyclerOffer, recyclerOfferRetake;
-
-    LinearLayoutManager offerListLayoutManager, offerRetakeListLayoutManager;
-    SuGangOfferListAdapter offerAdapter, offerRetakeAdapter;
+    private LinearLayoutManager offerListLayoutManager, offerRetakeListLayoutManager;
+    private SuGangOfferListAdapter offerAdapter, offerRetakeAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,14 +80,18 @@ public class MyPageFragment extends Fragment {
 
         mView =  inflater.inflate(R.layout.fragment_my_page, container, false);
         editScore = mView.findViewById(R.id.edit_my_page_score);
+
         textSave = mView.findViewById(R.id.text_my_page_score_save);
         textRecomend = mView.findViewById(R.id.text_my_page_recomend);
         textRetake = mView.findViewById(R.id.text_my_page_retake);
+
         textRemainMajor = mView.findViewById(R.id.text_my_page_remain_major);
         textRemainMSC = mView.findViewById(R.id.text_my_page_remain_msc);
         textRemainSuper = mView.findViewById(R.id.text_my_page_remain_super);
-        textTotalTime = mView.findViewById(R.id.text_my_page_total_time);
 
+        textTotalTime = mView.findViewById(R.id.text_my_page_total_time);
+        switch1 = mView.findViewById(R.id.switch1);
+        buttonSetAlarm = mView.findViewById(R.id.btn_my_page_set_alarm);
 
         finishFlag = false;
 
@@ -183,16 +129,21 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+        buttonSetAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlarmDialog();
+            }
+        });
 
         textRecomend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(finishFlag) {
-                    //String str = "-미수강 과목- \n";
-                    ArrayList<SuGangDTO> arrayList = recomendList();
-                    ArrayList<SuGangDTO> filter = new ArrayList<>();
+                    ArrayList<SuGang> arrayList = recomendList();
+                    ArrayList<SuGang> filter = new ArrayList<>();
                     if(arrayList.size() > 0){
-                        for(SuGangDTO dto : arrayList){
+                        for(SuGang dto : arrayList){
                             if(arrayList.get(0).semester == dto.semester)
                                 filter.add(dto);
                         }
@@ -203,8 +154,6 @@ public class MyPageFragment extends Fragment {
                     offerAdapter = new SuGangOfferListAdapter(filter);
                     recyclerOffer.setVisibility(View.VISIBLE);
                     recyclerOffer.setAdapter(offerAdapter);
-                    //textRecomend.setText(str);
-
                 }
             }
         });
@@ -213,9 +162,7 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(finishFlag) {
-                    //String str = "-재수강이 필요한 과목- \n";
-                    ArrayList<SuGangDTO> arrayList = retakeList();
-                    //ArrayList<SuGangDTO> filter = new ArrayList<>();
+                    ArrayList<SuGang> arrayList = retakeList();
                     offerRetakeAdapter = new SuGangOfferListAdapter(arrayList);
                     recyclerOfferRetake.setVisibility(View.VISIBLE);
                     recyclerOfferRetake.setAdapter(offerRetakeAdapter);
@@ -225,6 +172,20 @@ public class MyPageFragment extends Fragment {
 
         setToTalScore();
         getNoComplete();
+
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    alarmWork(m_time);
+                }
+                saveData();
+            }
+        });
+        loadDate();
+        updateViews();
+
+        new PushAlarmManager(this, System.currentTimeMillis());
 
         return mView;
     }
@@ -240,16 +201,16 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
-                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
-                        listMajor.add(suGangDTO);
+                    SuGang suGang = postSnapshot.getValue(SuGang.class);
+                        listMajor.add(suGang);
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
-                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
-                        listMsc.add(suGangDTO);
+                    SuGang suGang = postSnapshot.getValue(SuGang.class);
+                        listMsc.add(suGang);
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
-                    SuGangDTO suGangDTO = postSnapshot.getValue(SuGangDTO.class);
-                        listSuper.add(suGangDTO);
+                    SuGang suGang = postSnapshot.getValue(SuGang.class);
+                        listSuper.add(suGang);
                 }
                 finishFlag = true;
             }
@@ -262,24 +223,24 @@ public class MyPageFragment extends Fragment {
     }
 
 
-    public ArrayList<SuGangDTO> recomendList(){
-        ArrayList<SuGangDTO> result = new ArrayList<>();
+    public ArrayList<SuGang> recomendList(){
+        ArrayList<SuGang> result = new ArrayList<>();
 
-        for(SuGangDTO suGangDTO : listMajor){
-            if(!suGangDTO.isComplete) {
-                result.add(suGangDTO);
+        for(SuGang suGang : listMajor){
+            if(!suGang.isComplete) {
+                result.add(suGang);
             }
         }
 
-        for(SuGangDTO suGangDTO : listMsc){
-            if(!suGangDTO.isComplete) {
-                result.add(suGangDTO);
+        for(SuGang suGang : listMsc){
+            if(!suGang.isComplete) {
+                result.add(suGang);
             }
         }
 
-        for(SuGangDTO suGangDTO : listSuper){
-            if(!suGangDTO.isComplete) {
-                result.add(suGangDTO);
+        for(SuGang suGang : listSuper){
+            if(!suGang.isComplete) {
+                result.add(suGang);
             }
         }
 
@@ -287,24 +248,24 @@ public class MyPageFragment extends Fragment {
         return result;
     }
 
-    public ArrayList<SuGangDTO> retakeList(){
-        ArrayList<SuGangDTO> result = new ArrayList<>();
+    public ArrayList<SuGang> retakeList(){
+        ArrayList<SuGang> result = new ArrayList<>();
 
-        for(SuGangDTO suGangDTO : listMajor){
-            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
-                result.add(suGangDTO);
+        for(SuGang suGang : listMajor){
+            if(suGang.grade <=2.5 && suGang.grade!=-1){
+                result.add(suGang);
             }
         }
 
-        for(SuGangDTO suGangDTO : listMsc){
-            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
-                result.add(suGangDTO);
+        for(SuGang suGang : listMsc){
+            if(suGang.grade <=2.5 && suGang.grade!=-1){
+                result.add(suGang);
             }
         }
 
-        for(SuGangDTO suGangDTO : listSuper){
-            if(suGangDTO.grade <=2.5 && suGangDTO.grade!=-1){
-                result.add(suGangDTO);
+        for(SuGang suGang : listSuper){
+            if(suGang.grade <=2.5 && suGang.grade!=-1){
+                result.add(suGang);
             }
         }
         Collections.sort(result);
@@ -326,21 +287,21 @@ public class MyPageFragment extends Fragment {
                 double timeSuper = 0;
 
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MAJOR).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         scoreMajor += (sugang.grade*sugang.time);
                         timeMajor += sugang.time;
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_MSC).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         scoreMSC += sugang.grade*sugang.time;
                         timeMSC += sugang.time;
                     }
                 }
                 for(DataSnapshot postSnapshot : dataSnapshot.child(DB_SUPER).getChildren()){
-                    SuGangDTO sugang = postSnapshot.getValue(SuGangDTO.class);
+                    SuGang sugang = postSnapshot.getValue(SuGang.class);
                     if(sugang.isComplete){
                         scoreSuper += sugang.grade*sugang.time;
                         timeSuper += sugang.time;
@@ -364,9 +325,6 @@ public class MyPageFragment extends Fragment {
         textRemainSuper.setText("전문교양 : " + (GOAL_SUPER_TIME - timeSuper)  + "학점");
 
     }
-}
-
-/*
     public void saveData(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences .Editor editor = sharedPreferences.edit();
@@ -388,7 +346,16 @@ public class MyPageFragment extends Fragment {
     }
 
 
-    public void onClick6(View view) {
+    public void alarmWork(int time){
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        AlarmManager am = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time * 1000, pendingIntent);
+        Toast.makeText(getContext(), "Alarm set in" + time + "seconds", Toast.LENGTH_SHORT).show();
+    }
+
+    private void setAlarmDialog(){
         final List<String> Items = new ArrayList<>();
         Items.add("15분전");
         Items.add("10분전");
@@ -447,13 +414,9 @@ public class MyPageFragment extends Fragment {
         alertDialog.show();
     }
 
-    public void alarmWork(int time){
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+}
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-        AlarmManager am = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time * 1000, pendingIntent);
-        Toast.makeText(getContext(), "Alarm set in" + time + "seconds", Toast.LENGTH_SHORT).show();
-    }
 
- */
+
+
+

@@ -1,4 +1,4 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.sugang;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,25 +10,22 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tpj.teamproject.controller.SuGangDTO;
+import com.tpj.teamproject.R;
+import com.tpj.teamproject.controller.database.SuGang;
 
 import java.util.ArrayList;
 
 
     public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.MyViewHolder> {
-        ArrayList<SuGangDTO> mDataset;
+        ArrayList<SuGang> mDataset;
         SuGangFragment mFragment;
 
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
         public static class MyViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
             public TextView textView, textSaveSuGang;
             public RadioButton radioIsComplete;
             public EditText editGrade;
             public View view;
-            public MyViewHolder(View v) { // = item
+            public MyViewHolder(View v) {
                 super(v);
                 this.view = v;
                 textView = v.findViewById(R.id.item_sugang_name);
@@ -38,8 +35,7 @@ import java.util.ArrayList;
             }
         }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public SuGangListAdapter(SuGangFragment fragment, ArrayList<SuGangDTO> myDataset) {
+        public SuGangListAdapter(SuGangFragment fragment, ArrayList<SuGang> myDataset) {
             mDataset = myDataset;
             mFragment = fragment;
         }

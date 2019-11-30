@@ -1,10 +1,12 @@
-package com.tpj.teamproject;
+package com.tpj.teamproject.ui.mypage;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.widget.Toast;
+
+import com.tpj.teamproject.R;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public MediaPlayer mp;
