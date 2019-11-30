@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.calendar.MemoActivity">
+
+    <Button
+        android:id="@+id/btnGoCalendar"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로가기"
+        app:layout_constraintBottom_toTopOf="@+id/data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+
+        android:id="@+id/load"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:text="LOAD"
+        app:layout_constraintBottom_toTopOf="@+id/inputText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data"
+        app:layout_constraintVertical_bias="0.238"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/save"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_weight="1"
+        android:text="SAVE"
+        app:layout_constraintBottom_toTopOf="@+id/inputText"
+        app:layout_constraintEnd_toStartOf="@+id/load"
+        app:layout_constraintTop_toBottomOf="@+id/data"
+        app:layout_constraintVertical_bias="0.238"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/delete"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="DELETE"
+        app:layout_constraintBottom_toTopOf="@+id/inputText"
+        app:layout_constraintEnd_toStartOf="@+id/save"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data"
+        app:layout_constraintVertical_bias="0.239"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="403dp"
+        android:layout_height="287dp"
+        android:layout_marginBottom="172dp"
+        android:layout_weight="1"
+        android:singleLine="false"
+        android:textIsSelectable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnGoCalendar"
+        android:layout_centerHorizontal="true"
+        android:hint="Date"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.288"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

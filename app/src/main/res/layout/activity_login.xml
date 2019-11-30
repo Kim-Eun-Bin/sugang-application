@@ -14,11 +14,12 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo"
-            android:background="@null"/>
+            android:layout_width="77dp"
+            android:layout_height="57dp"
+            android:background="@null"
+            android:src="@drawable/logo" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/username"

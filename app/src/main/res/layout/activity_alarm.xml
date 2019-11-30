@@ -4,20 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".ui.mypage.AlarmActivity">
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="51dp"
+        android:background="@null"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.304"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="197dp"
-        android:text="유체크 알람"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:layout_marginTop="284dp"
+        android:gravity="center"
+        android:text="유체크 확인하세요"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/main_btn"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="59dp"
@@ -25,19 +43,21 @@
         android:layout_marginEnd="91dp"
         android:layout_marginRight="91dp"
         android:text="메인으로"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/exit_btn"
+        app:layout_constraintEnd_toStartOf="@+id/exit_btn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/exit_btn"
+        android:backgroundTint="@color/colorNormal"
+        android:textColor="#FFFEFF"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="61dp"
         android:layout_marginRight="61dp"
         android:layout_marginBottom="236dp"
         android:text="종료"
-        android:onClick="onClick2"
+        android:onClick="Exit_Active"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -90,7 +90,7 @@ public class MyPageFragment extends Fragment {
         textRemainSuper = mView.findViewById(R.id.text_my_page_remain_super);
 
         textTotalTime = mView.findViewById(R.id.text_my_page_total_time);
-        switch1 = mView.findViewById(R.id.switch1);
+        switch1 = mView.findViewById(R.id.alarm_switch);
         buttonSetAlarm = mView.findViewById(R.id.btn_my_page_set_alarm);
 
         finishFlag = false;
@@ -395,7 +395,7 @@ public class MyPageFragment extends Fragment {
                         m_time = 1;
                     }
                     //설정된 시간 안내 Toast
-                    Toast.makeText(getContext(), "alarm set in" + m_time + "seconds", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "alarm set before " + m_time + "minute", Toast.LENGTH_SHORT).show();
                 }else{
                     //항목을 선택하세요 안내
                     Toast.makeText(getContext(), "항목을 선택하세요", Toast.LENGTH_SHORT).show();

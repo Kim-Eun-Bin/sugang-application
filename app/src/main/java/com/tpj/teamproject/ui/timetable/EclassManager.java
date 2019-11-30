@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tpj.teamproject.ui.home.HomeFragment;
 import com.tpj.teamproject.controller.parser.ParseEclass;
+import com.tpj.teamproject.ui.mypage.MyPageFragment;
 
 public class EclassManager extends AsyncTask<Void,Void,Void> {
     private Fragment activity;
@@ -38,6 +39,7 @@ public class EclassManager extends AsyncTask<Void,Void,Void> {
             @Override
             public void run() {
                 ((HomeFragment)activity).setCourse(eclass.getCourse());
+                //((MyPageFragment)activity).setCourse(eclass.getCourse());
             }
         });
 
