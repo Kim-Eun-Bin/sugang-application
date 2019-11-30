@@ -219,9 +219,18 @@ public class MyPageFragment extends Fragment {
                 if(finishFlag) {
                     //String str = "-미수강 과목- \n";
                     ArrayList<SuGangDTO> arrayList = recomendList();
-                    offerAdapter = new SuGangOfferListAdapter(arrayList);
+                    ArrayList<SuGangDTO> filter = new ArrayList<>();
+                    if(arrayList.size() > 0){
+                        for(SuGangDTO dto : arrayList){
+                            if(arrayList.get(0).semester == dto.semester)
+                                filter.add(dto);
+                        }
+                    }else{
+
+                    }
+
+                    offerAdapter = new SuGangOfferListAdapter(filter);
                     recyclerOffer.setVisibility(View.VISIBLE);
-                    textRecomend.setVisibility(View.GONE);
                     recyclerOffer.setAdapter(offerAdapter);
                     //textRecomend.setText(str);
 
@@ -234,13 +243,10 @@ public class MyPageFragment extends Fragment {
             public void onClick(View v) {
                 if(finishFlag) {
                     //String str = "-재수강이 필요한 과목- \n";
-                    ArrayList<SuGangDTO> retakeList = retakeList();
-                    offerRetakeAdapter = new SuGangOfferListAdapter(retakeList);
-                    for(SuGangDTO dto : retakeList){
-                        System.out.println(dto.name);
-                    }
+                    ArrayList<SuGangDTO> arrayList = retakeList();
+                    //ArrayList<SuGangDTO> filter = new ArrayList<>();
+                    offerRetakeAdapter = new SuGangOfferListAdapter(arrayList);
                     recyclerOfferRetake.setVisibility(View.VISIBLE);
-                    textRetake.setVisibility(View.GONE);
                     recyclerOfferRetake.setAdapter(offerRetakeAdapter);
                 }
             }
@@ -289,19 +295,19 @@ public class MyPageFragment extends Fragment {
         ArrayList<SuGangDTO> result = new ArrayList<>();
 
         for(SuGangDTO suGangDTO : listMajor){
-            if(!suGangDTO.isComplete){
+            if(!suGangDTO.isComplete) {
                 result.add(suGangDTO);
             }
         }
 
         for(SuGangDTO suGangDTO : listMsc){
-            if(!suGangDTO.isComplete){
+            if(!suGangDTO.isComplete) {
                 result.add(suGangDTO);
             }
         }
 
         for(SuGangDTO suGangDTO : listSuper){
-            if(!suGangDTO.isComplete){
+            if(!suGangDTO.isComplete) {
                 result.add(suGangDTO);
             }
         }

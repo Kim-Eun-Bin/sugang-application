@@ -38,52 +38,63 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="#000fff"
+            android:textColor="@color/colorDeep"
             android:textStyle="bold"
             android:text="다음 수강신청 추천 목록"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-                <TextView
+                <LinearLayout
                     android:layout_weight="1"
-                    android:id="@+id/text_my_page_recomend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textColor="@color/colorReverse"
-                    android:clickable="true"
-                    android:text="미수강 추천 목록 보기"/>
-                <!-- TODO: Update blank fragment layout -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_my_page_offer"
-                    android:layout_weight="1"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/text_my_page_retake"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textColor="@color/colorReverse"
-                    android:clickable="true"
-                    android:text="재수강 해야하는 과목 보기"/>
-                <!-- TODO: Update blank fragment layout -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_my_page_offer_retake"
+                    android:orientation="vertical">
+                    <TextView
+
+                        android:id="@+id/text_my_page_recomend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/colorReverse"
+                        android:clickable="true"
+                        android:text="미수강 추천 목록 보기"/>
+                    <!-- TODO: Update blank fragment layout -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_my_page_offer"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_weight="1"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/text_my_page_retake"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/colorReverse"
+                        android:clickable="true"
+                        android:text="재수강 해야하는 과목 보기"/>
+                    <!-- TODO: Update blank fragment layout -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_my_page_offer_retake"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
             </LinearLayout>
 
     </LinearLayout>

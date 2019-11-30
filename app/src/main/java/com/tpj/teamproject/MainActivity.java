@@ -53,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction().hide(sugangFragment).commit();
                 break;
             case R.id.main_button_mypage:
+                mypageFragment = new MyPageFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.main_fragment,mypageFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(homeFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(mypageFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(sugangFragment).commit();
                 break;
             case R.id.main_button_sugang:
+
                 getSupportFragmentManager().beginTransaction().hide(homeFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(mypageFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(sugangFragment).commit();
