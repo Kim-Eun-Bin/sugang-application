@@ -15,34 +15,34 @@ import com.tpj.teamproject.controller.SuGangDTO;
 import java.util.ArrayList;
 
 
-public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.MyViewHolder> {
-    ArrayList<SuGangDTO> mDataset;
-    SuGangFragment mFragment;
+    public class SuGangListAdapter extends RecyclerView.Adapter<SuGangListAdapter.MyViewHolder> {
+        ArrayList<SuGangDTO> mDataset;
+        SuGangFragment mFragment;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView textView, textSaveSuGang;
-        public RadioButton radioIsComplete;
-        public EditText editGrade;
-        public View view;
-        public MyViewHolder(View v) { // = item
-            super(v);
-            this.view = v;
-            textView = v.findViewById(R.id.item_sugang_name);
-            radioIsComplete = v.findViewById(R.id.radio_sugang_isComplete);
-            editGrade = v.findViewById(R.id.edit_sugang_grade);
-            textSaveSuGang = v.findViewById(R.id.text_sugang_save_grade);
+        // Provide a reference to the views for each data item
+        // Complex data items may need more than one view per item, and
+        // you provide access to all the views for a data item in a view holder
+        public static class MyViewHolder extends RecyclerView.ViewHolder {
+            // each data item is just a string in this case
+            public TextView textView, textSaveSuGang;
+            public RadioButton radioIsComplete;
+            public EditText editGrade;
+            public View view;
+            public MyViewHolder(View v) { // = item
+                super(v);
+                this.view = v;
+                textView = v.findViewById(R.id.item_sugang_name);
+                radioIsComplete = v.findViewById(R.id.radio_sugang_isComplete);
+                editGrade = v.findViewById(R.id.edit_sugang_grade);
+                textSaveSuGang = v.findViewById(R.id.text_sugang_save_grade);
+            }
         }
-    }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public SuGangListAdapter(SuGangFragment fragment, ArrayList<SuGangDTO> myDataset) {
-        mDataset = myDataset;
-        mFragment = fragment;
-    }
+        // Provide a suitable constructor (depends on the kind of dataset)
+        public SuGangListAdapter(SuGangFragment fragment, ArrayList<SuGangDTO> myDataset) {
+            mDataset = myDataset;
+            mFragment = fragment;
+        }
 
     // Create new views (invoked by the layout manager)
     @Override

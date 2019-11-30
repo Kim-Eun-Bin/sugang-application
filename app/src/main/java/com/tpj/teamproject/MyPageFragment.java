@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -33,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tpj.teamproject.controller.SuGangDTO;
+import com.tpj.teamproject.ui.SuGangOfferListAdapter;
 
 import org.w3c.dom.Text;
 
@@ -154,6 +156,10 @@ public class MyPageFragment extends Fragment {
     EditText editScore;
     TextView textSave, textRecomend, textRemainMajor, textRemainMSC, textRemainSuper, textTotalTime, textRetake;
     String uid;
+    RecyclerView recyclerOffer, recyclerOfferRetake;
+
+    LinearLayoutManager offerListLayoutManager, offerRetakeListLayoutManager;
+    SuGangOfferListAdapter offerAdapter, offerRetakeAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -169,6 +175,7 @@ public class MyPageFragment extends Fragment {
         textRemainSuper = mView.findViewById(R.id.text_my_page_remain_super);
         textTotalTime = mView.findViewById(R.id.text_my_page_total_time);
 
+
         finishFlag = false;
 
         textSave.setOnClickListener(new View.OnClickListener() {
@@ -180,10 +187,22 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+        recyclerOffer = mView.findViewById(R.id.recycler_my_page_offer);
+        recyclerOffer.setHasFixedSize(true);
+
+        offerListLayoutManager = new LinearLayoutManager(getContext());
+        recyclerOffer.setLayoutManager(offerListLayoutManager);
+
+        recyclerOfferRetake = mView.findViewById(R.id.recycler_my_page_offer_retake);
+        recyclerOfferRetake.setHasFixedSize(true);
+
+        offerRetakeListLayoutManager = new LinearLayoutManager(getContext());
+        recyclerOfferRetake.setLayoutManager(offerRetakeListLayoutManager);
+
         FirebaseDatabase.getInstance().getReference("user").child(uid).child("config").child("goal_score").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(editScore != null)
+                if(editScore != null && dataSnapshot.exists())
                     editScore.setText(dataSnapshot.getValue().toString());
             }
 
@@ -198,14 +217,13 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(finishFlag) {
-                    String str = "-미수강 과목- \n";
+                    //String str = "-미수강 과목- \n";
                     ArrayList<SuGangDTO> arrayList = recomendList();
-                    for (SuGangDTO s : arrayList) {
-                        if (arrayList.get(0).semester == s.semester)
-                            str += s.name + "\n";
-                    }
-                    str += "\n";
-                    textRecomend.setText(str);
+                    offerAdapter = new SuGangOfferListAdapter(arrayList);
+                    recyclerOffer.setVisibility(View.VISIBLE);
+                    textRecomend.setVisibility(View.GONE);
+                    recyclerOffer.setAdapter(offerAdapter);
+                    //textRecomend.setText(str);
 
                 }
             }
@@ -215,12 +233,15 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(finishFlag) {
-                    String str = "-재수강이 필요한 과목- \n";
+                    //String str = "-재수강이 필요한 과목- \n";
                     ArrayList<SuGangDTO> retakeList = retakeList();
-                    for (SuGangDTO s : retakeList) {
-                        str += s.name + "\n";
+                    offerRetakeAdapter = new SuGangOfferListAdapter(retakeList);
+                    for(SuGangDTO dto : retakeList){
+                        System.out.println(dto.name);
                     }
-                    textRetake.setText(str);
+                    recyclerOfferRetake.setVisibility(View.VISIBLE);
+                    textRetake.setVisibility(View.GONE);
+                    recyclerOfferRetake.setAdapter(offerRetakeAdapter);
                 }
             }
         });
