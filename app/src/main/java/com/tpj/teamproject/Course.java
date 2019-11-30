@@ -4,20 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Course implements Serializable {
-    int number;
-    String title;
-    ArrayList<CourseTime> times;
-    String url;
+    public int number;
+    public String title;
+    public ArrayList<CourseTime> times;
+    public String url;
 
-    private class CourseTime implements Serializable{
-        String day;
-        String time;
+    public class CourseTime implements Serializable{
+        public String day;
+        public String time;
 
         public CourseTime(String day, String time){
             this.day = day;
             this.time = time;
         }
-
 
         @Override
         public String toString(){

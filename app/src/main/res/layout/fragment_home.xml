@@ -45,6 +45,7 @@
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/image_home_setting"
                     android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -94,6 +95,12 @@
         </LinearLayout>
 
     </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/content_time_table"/>
+    </ScrollView>
+
 
 
     <!-- TODO: Update blank fragment layout -->
