@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorBackground"
+        android:layout_marginTop="9dp"
         android:elevation="6dp">
         <ImageView
             android:id="@+id/main_button_home"
